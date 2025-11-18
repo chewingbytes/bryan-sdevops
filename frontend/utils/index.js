@@ -3,6 +3,7 @@ let books = [];
 let editIndex = null;
 
 const loginSection = document.getElementById("login-section");
+const registerSection = document.getElementById("register-section");
 const librarySection = document.getElementById("library-section");
 const userDisplay = document.getElementById("current-user");
 const logoutBtn = document.getElementById("logout-btn");
@@ -44,6 +45,14 @@ document.getElementById("login-btn").addEventListener("click", async () => {
   showLibrary();
 });
 
+document.getElementById("register-nav").addEventListener("click", () => {
+  showRegister();
+});
+
+document.getElementById("login-nav").addEventListener("click", () => {
+  showLogin();
+});
+
 // LOGOUT
 logoutBtn.addEventListener("click", () => {
   currentUser = null;
@@ -56,6 +65,15 @@ logoutBtn.addEventListener("click", () => {
 // -----------------
 function showLogin() {
   loginSection.classList.remove("hidden");
+  registerSection.classList.add("hidden");
+  librarySection.classList.add("hidden");
+  logoutBtn.classList.add("hidden");
+  userDisplay.textContent = "";
+}
+
+function showRegister() {
+  loginSection.classList.add("hidden");
+  registerSection.classList.remove("hidden");
   librarySection.classList.add("hidden");
   logoutBtn.classList.add("hidden");
   userDisplay.textContent = "";
@@ -63,6 +81,7 @@ function showLogin() {
 
 async function showLibrary() {
   loginSection.classList.add("hidden");
+  registerSection.classList.add("hidden");
   librarySection.classList.remove("hidden");
   logoutBtn.classList.remove("hidden");
   userDisplay.textContent = `👋 Hello, ${currentUser}`;
