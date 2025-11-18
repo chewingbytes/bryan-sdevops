@@ -1,8 +1,8 @@
 import express from "express";
 import cors from "cors";
 
-import userRoutes from "./routes/userRoutes.js";
-import bookRoutes from "./routes/bookRoutes.js";
+import userRoutes from "./utils/jonathanUtils.js";
+import bookRoutes from "./utils/bryanUtil.js";
 import deleteRoutes from "./routes/deleteRoutes.js";
 
 const app = express();
