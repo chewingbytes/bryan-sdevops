@@ -27,6 +27,7 @@ const closeReadBtn = document.getElementById("close-read-btn");
 // -----------------
 // LOGIN / REGISTER
 // -----------------
+
 document.getElementById("login-btn").addEventListener("click", async () => {
   const username = document.getElementById("username").value.trim();
   if (!username) return alert("Enter a username");
