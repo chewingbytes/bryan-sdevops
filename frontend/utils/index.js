@@ -55,17 +55,17 @@ document.getElementById("login-btn").addEventListener("click", async () => {
     else if (password !== user.password) {
       return alert("Incorrect username or password");
     }
-    else 
-      console.log("Login successful");
+    else
+      console.log("Login successful"),
+      // successful login
+      currentUser = username;
+      localStorage.setItem("currentUser", currentUser); // optional for page refresh
+      showLibrary();
+    
 
   } catch (err) {
     console.error("Failed to fetch users:", err);
   }
-
-  // successful login
-  currentUser = username;
-  localStorage.setItem("currentUser", currentUser); // optional for page refresh
-  showLibrary();
 });
 
 // register logic
@@ -83,13 +83,13 @@ document.getElementById("register-btn").addEventListener("click", async () => {
 
     let checkData;
     checkData = await res.json();
-    
+
     // check if user already exists
     const existingUser = checkData.find((u) => u.username === username);
     if (existingUser) {
       return alert("Username already taken");
     }
-    else 
+    else
       console.log("Username available");
 
     // call backend to add user
@@ -100,7 +100,7 @@ document.getElementById("register-btn").addEventListener("click", async () => {
     });
 
     showLogin()
-    
+
   } catch (err) {
     console.error("Failed to retrieve and check users:", err);
   }
@@ -150,7 +150,7 @@ async function showLibrary() {
   renderBooks();
 }
 
-async function fetchBooks() {
+/* async function fetchBooks() {
   const res = await fetch(`http://localhost:3000/api/books/${currentUser}`);
   books = await res.json();
 }
@@ -258,4 +258,4 @@ closeReadBtn.addEventListener("click", () => readModal.classList.add("hidden"));
 // -----------------
 currentUser = localStorage.getItem("currentUser") || null;
 if (currentUser) showLibrary();
-else showLogin();
+else showLogin(); */

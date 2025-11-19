@@ -26,7 +26,7 @@ router.post("/", (req, res) => {
     return res.json({ success: false, created: false, error: "Username already taken" });
   }
 
-  const newUser = { username: username.trim(), password: password.trim() };
+  const newUser = { username: username.trim(), password: password.trim(), role: "user" };
   data.users.push(newUser);
   writeData(data);
 
