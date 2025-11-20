@@ -146,6 +146,31 @@ async function showLibrary() {
   librarySection.classList.remove("hidden");
   logoutBtn.classList.remove("hidden");
   userDisplay.textContent = `👋 Hello, ${currentUser}`;
+
+  try {
+     const res = await fetch("http://localhost:3000/api/users", {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    });
+
+    let data;
+    data = await res.json();
+
+    console.log("Users response:", data);
+    const checkRole = data.find((u) => u.username === currentUser && u.role === "user");
+    if (checkRole) {
+      addBookBtn.classList.add("hidden");
+      document.getElementById("action-column").classList.add("hidden");
+    } else {
+      addBookBtn.classList.remove("hidden");
+      document.getElementById("action-column").classList.remove("hidden");
+    }
+    
+
+  } catch (err) {
+    console.error("Failed to check user role:", err);
+  }
+
   await fetchBooks();
   renderBooks();
 }
