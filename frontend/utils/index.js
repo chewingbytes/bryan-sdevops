@@ -3,6 +3,7 @@ let books = [];
 let editIndex = null;
 
 const loginSection = document.getElementById("login-section");
+const registerSection = document.getElementById("register-section");
 const librarySection = document.getElementById("library-section");
 const userDisplay = document.getElementById("current-user");
 const logoutBtn = document.getElementById("logout-btn");
@@ -27,20 +28,90 @@ const closeReadBtn = document.getElementById("close-read-btn");
 // -----------------
 // LOGIN / REGISTER
 // -----------------
+
+// login logic
 document.getElementById("login-btn").addEventListener("click", async () => {
-  const username = document.getElementById("username").value.trim();
+  const username = document.getElementById("lgn-username").value.trim();
+  const password = document.getElementById("lgn-password").value.trim();
   if (!username) return alert("Enter a username");
+  if (!password) return alert("Enter a password");
 
-  // call backend to add user
-  await fetch("http://localhost:3000/api/users", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ username }),
-  });
+  // call backend to get users
+  try {
+    const res = await fetch("http://localhost:3000/api/users", {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    });
 
-  currentUser = username;
-  localStorage.setItem("currentUser", currentUser); // optional for page refresh
-  showLibrary();
+    let data;
+    data = await res.json();
+
+    // check if user exists and password matches
+    console.log("Users response:", data);
+    const user = data.find((u) => u.username === username && u.password === password);
+    if (!user) {
+      return alert("Incorrect username or password");
+    }
+    else if (password !== user.password) {
+      return alert("Incorrect username or password");
+    }
+    else
+      console.log("Login successful"),
+      // successful login
+      currentUser = username;
+      localStorage.setItem("currentUser", currentUser); // optional for page refresh
+      showLibrary();
+    
+
+  } catch (err) {
+    console.error("Failed to fetch users:", err);
+  }
+});
+
+// register logic
+document.getElementById("register-btn").addEventListener("click", async () => {
+  const username = document.getElementById("reg-username").value.trim();
+  const password = document.getElementById("reg-password").value.trim();
+  if (!username) return alert("Enter a username");
+  if (!password) return alert("Enter a password");
+
+  try {
+    const res = await fetch("http://localhost:3000/api/users", {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    });
+
+    let checkData;
+    checkData = await res.json();
+
+    // check if user already exists
+    const existingUser = checkData.find((u) => u.username === username);
+    if (existingUser) {
+      return alert("Username already taken");
+    }
+    else
+      console.log("Username available");
+
+    // call backend to add user
+    await fetch("http://localhost:3000/api/users", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, password }),
+    });
+
+    showLogin()
+
+  } catch (err) {
+    console.error("Failed to retrieve and check users:", err);
+  }
+});
+
+document.getElementById("register-nav").addEventListener("click", () => {
+  showRegister();
+});
+
+document.getElementById("login-nav").addEventListener("click", () => {
+  showLogin();
 });
 
 // LOGOUT
@@ -55,6 +126,15 @@ logoutBtn.addEventListener("click", () => {
 // -----------------
 function showLogin() {
   loginSection.classList.remove("hidden");
+  registerSection.classList.add("hidden");
+  librarySection.classList.add("hidden");
+  logoutBtn.classList.add("hidden");
+  userDisplay.textContent = "";
+}
+
+function showRegister() {
+  loginSection.classList.add("hidden");
+  registerSection.classList.remove("hidden");
   librarySection.classList.add("hidden");
   logoutBtn.classList.add("hidden");
   userDisplay.textContent = "";
@@ -62,14 +142,40 @@ function showLogin() {
 
 async function showLibrary() {
   loginSection.classList.add("hidden");
+  registerSection.classList.add("hidden");
   librarySection.classList.remove("hidden");
   logoutBtn.classList.remove("hidden");
-  userDisplay.textContent = `👋 Hello, ${currentUser}`;
+  userDisplay.textContent = `Hello, ${currentUser}`;
+
+  try {
+     const res = await fetch("http://localhost:3000/api/users", {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    });
+
+    let data;
+    data = await res.json();
+
+    console.log("Users response:", data);
+    const checkRole = data.find((u) => u.username === currentUser && u.role === "user");
+    if (checkRole) {
+      addBookBtn.classList.add("hidden");
+      document.getElementById("action-column").classList.add("hidden");
+    } else {
+      addBookBtn.classList.remove("hidden");
+      document.getElementById("action-column").classList.remove("hidden");
+    }
+    
+
+  } catch (err) {
+    console.error("Failed to check user role:", err);
+  }
+
   await fetchBooks();
   renderBooks();
 }
 
-async function fetchBooks() {
+/* async function fetchBooks() {
   const res = await fetch(`http://localhost:3000/api/books/${currentUser}`);
   books = await res.json();
 }
@@ -85,9 +191,9 @@ function renderBooks() {
       <td>${book.title}</td>
       <td>${book.author}</td>
       <td>
-        <button onclick="readBook(${index})">📖 Read</button>
-        <button onclick="editBook(${index})">✏️ Edit</button>
-        <button onclick="deleteBook(${index})">🗑️ Delete</button>
+        <button onclick="readBook(${index})">Read</button>
+        <button onclick="editBook(${index})">Edit</button>
+        <button onclick="deleteBook(${index})">Delete</button>
       </td>
     `;
     bookList.appendChild(row);
@@ -177,4 +283,4 @@ closeReadBtn.addEventListener("click", () => readModal.classList.add("hidden"));
 // -----------------
 currentUser = localStorage.getItem("currentUser") || null;
 if (currentUser) showLibrary();
-else showLogin();
+else showLogin(); */
