@@ -145,7 +145,7 @@ async function showLibrary() {
   registerSection.classList.add("hidden");
   librarySection.classList.remove("hidden");
   logoutBtn.classList.remove("hidden");
-  userDisplay.textContent = `👋 Hello, ${currentUser}`;
+  userDisplay.textContent = `Hello, ${currentUser}`;
 
   try {
      const res = await fetch("http://localhost:3000/api/users", {
@@ -191,9 +191,9 @@ function renderBooks() {
       <td>${book.title}</td>
       <td>${book.author}</td>
       <td>
-        <button onclick="readBook(${index})">📖 Read</button>
-        <button onclick="editBook(${index})">✏️ Edit</button>
-        <button onclick="deleteBook(${index})">🗑️ Delete</button>
+        <button onclick="readBook(${index})">Read</button>
+        <button onclick="editBook(${index})">Edit</button>
+        <button onclick="deleteBook(${index})">Delete</button>
       </td>
     `;
     bookList.appendChild(row);
