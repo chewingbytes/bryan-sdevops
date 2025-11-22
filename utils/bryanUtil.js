@@ -38,19 +38,6 @@ async function writeBooksFile(data) {
 }
 
 // -----------------
-// GET /books
-// -----------------
-async function getBooks(req, res) {
-  try {
-    const data = await readBooksFile();
-    res.json({ books: data.books || [] });
-  } catch (e) {
-    console.error('getBooks error', e);
-    res.status(500).json({ error: 'Failed to read books' });
-  }
-}
-
-// -----------------
 // POST /books
 // body: { user, title, author, content }
 // -----------------
@@ -82,6 +69,5 @@ async function addBook(req, res) {
 module.exports = {
   readBooksFile,
   writeBooksFile,
-  getBooks,
   addBook
 };

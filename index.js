@@ -16,23 +16,21 @@ const { addUser } = require("./utils/jonathanUtil");
 app.post("/add-user", addUser);
 
 
-const { deleteBook, updateBook } = require('./utils/williamUtil')
+const { deleteBook } = require('./utils/williamUtil')
 app.delete('/delete-book', deleteBook)
+
+const { updateBook } = require('./utils/editBookUtil')
 app.put('/books/:title', updateBook)
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + "/public/" + startPage);
 });
 
-const {
-  getBooks,
-  addBook,
-} = require("./utils/bryanUtil");
-
-app.get("/books", getBooks);
+const { addBook } = require("./utils/bryanUtil");
 app.post("/books", addBook);
 
-
+const { getBooks } = require("./utils/retrieveBooksUtil");
+app.get("/books", getBooks);
 
 server = app.listen(PORT, function () {
   const address = server.address();

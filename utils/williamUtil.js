@@ -1,4 +1,4 @@
-// William's responsibility: PUT (edit/update), DELETE books
+// William's responsibility: DELETE books
 
 const fs = require('fs').promises;
 const path = require('path');
@@ -50,7 +50,6 @@ async function readBooksFile() {
   }
 }
 
-
 // write books to JSON file
 async function writeBooksFile(data) {
   await fs.writeFile(BOOK_FILE, JSON.stringify(data, null, 2), 'utf8');
@@ -80,38 +79,10 @@ async function deleteBook(req, res) {
   }
 }
 
-// PUT /books/:title
-// body: { title, author, content }
-async function updateBook(req, res) {
-  try {
-    const originalTitle = req.params.title;
-    const { title, author, content } = req.body;
-
-    if (!originalTitle || !title || !author || !content) {
-      return res.status(400).json({ error: 'original title, title, author, content required' });
-    }
-
-    const data = await readBooksFile();
-    data.books = data.books || [];
-
-    const idx = data.books.findIndex(b => b.title === originalTitle);
-    if (idx === -1) return res.status(404).json({ error: 'Book not found' });
-
-    data.books[idx] = { ...data.books[idx], title, author, content };
-    await writeBooksFile(data);
-
-    res.json({ message: 'Book updated', book: data.books[idx] });
-  } catch (e) {
-    console.error('updateBook error', e);
-    res.status(500).json({ error: 'Failed to update book' });
-  }
-}
-
 module.exports = {
   readBooksFile,
   writeBooksFile,
   spamGuardActive,
   registerDeleteAttempt,
   deleteBook,
-  updateBook
 };
