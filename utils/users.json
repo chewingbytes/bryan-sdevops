@@ -1,0 +1,29 @@
+{
+  "users": [
+    {
+      "username": "administrator",
+      "password": "administrator",
+      "role": "admin"
+    },
+    {
+      "username": "test",
+      "password": "test",
+      "role": "user"
+    },
+    {
+      "username": "minso",
+      "password": "minso",
+      "role": "user"
+    },
+    {
+      "username": "new",
+      "password": "new",
+      "role": "user"
+    },
+    {
+      "username": "Wadmin",
+      "password": "Wadmin",
+      "role": "admin"
+    }
+  ]
+}
