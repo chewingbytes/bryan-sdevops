@@ -23,7 +23,6 @@ test.beforeAll(async () => {
 test.afterAll(() => {
   serverProcess && serverProcess.kill();
 });
-
 test('can add a book via UI', async ({ page }) => {
   await page.addInitScript(() => {
     localStorage.setItem('currentUser', JSON.stringify({ username: 'e2euser' }));
