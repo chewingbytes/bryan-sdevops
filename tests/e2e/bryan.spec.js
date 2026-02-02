@@ -46,7 +46,6 @@ test('can add a book via UI', async ({ page }) => {
   const text = await page.textContent('tbody#book-list');
   expect(text).toContain('E2E Test Title');
 });
-
 test('save shows not authenticated when no user', async ({ page }) => {
   await page.goto(BASE);
   await page.click('#add-book-btn');
