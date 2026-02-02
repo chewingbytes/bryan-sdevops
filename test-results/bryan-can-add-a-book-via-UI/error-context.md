@@ -1,0 +1,82 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e2]:
+  - banner [ref=e3]:
+    - heading "LibSys" [level=1] [ref=e4]
+    - generic [ref=e5]:
+      - text: Hello, e2euser
+      - button "Logout" [ref=e6] [cursor=pointer]
+  - main [ref=e7]:
+    - table [ref=e9]:
+      - rowgroup [ref=e10]:
+        - row "Title Author" [ref=e11]:
+          - columnheader "Title" [ref=e12]
+          - columnheader "Author" [ref=e13]
+      - rowgroup [ref=e14]:
+        - row "The Old Man and the Sea Ernest Hemingway" [ref=e15]:
+          - cell "The Old Man and the Sea" [ref=e16]:
+            - link "The Old Man and the Sea" [ref=e17] [cursor=pointer]:
+              - /url: "#"
+          - cell "Ernest Hemingway" [ref=e18]
+        - 'row "Sapiens: A Brief History of Humankind Yuval Noah Harari" [ref=e19]':
+          - 'cell "Sapiens: A Brief History of Humankind" [ref=e20]':
+            - 'link "Sapiens: A Brief History of Humankind" [ref=e21] [cursor=pointer]':
+              - /url: "#"
+          - cell "Yuval Noah Harari" [ref=e22]
+        - row "The Da Vinci Code Dan Brown" [ref=e23]:
+          - cell "The Da Vinci Code" [ref=e24]:
+            - link "The Da Vinci Code" [ref=e25] [cursor=pointer]:
+              - /url: "#"
+          - cell "Dan Brown" [ref=e26]
+        - row "Harry Potter and the Sorcerer's Stone J.K. Rowling" [ref=e27]:
+          - cell "Harry Potter and the Sorcerer's Stone" [ref=e28]:
+            - link "Harry Potter and the Sorcerer's Stone" [ref=e29] [cursor=pointer]:
+              - /url: "#"
+          - cell "J.K. Rowling" [ref=e30]
+        - row "Pride and Prejudice Jane Austen" [ref=e31]:
+          - cell "Pride and Prejudice" [ref=e32]:
+            - link "Pride and Prejudice" [ref=e33] [cursor=pointer]:
+              - /url: "#"
+          - cell "Jane Austen" [ref=e34]
+        - row "The Girl with the Dragon Tattoo Stieg Larsson" [ref=e35]:
+          - cell "The Girl with the Dragon Tattoo" [ref=e36]:
+            - link "The Girl with the Dragon Tattoo" [ref=e37] [cursor=pointer]:
+              - /url: "#"
+          - cell "Stieg Larsson" [ref=e38]
+        - row "1984 George Orwell" [ref=e39]:
+          - cell "1984" [ref=e40]:
+            - link "1984" [ref=e41] [cursor=pointer]:
+              - /url: "#"
+          - cell "George Orwell" [ref=e42]
+        - row "The Maze Runner James Dashner" [ref=e43]:
+          - cell "The Maze Runner" [ref=e44]:
+            - link "The Maze Runner" [ref=e45] [cursor=pointer]:
+              - /url: "#"
+          - cell "James Dashner" [ref=e46]
+        - row "Atomic Habits James Clear" [ref=e47]:
+          - cell "Atomic Habits" [ref=e48]:
+            - link "Atomic Habits" [ref=e49] [cursor=pointer]:
+              - /url: "#"
+          - cell "James Clear" [ref=e50]
+        - row "Charlotte's Web E.B. White" [ref=e51]:
+          - cell "Charlotte's Web" [ref=e52]:
+            - link "Charlotte's Web" [ref=e53] [cursor=pointer]:
+              - /url: "#"
+          - cell "E.B. White" [ref=e54]
+        - row "Salt, Fat, Acid, Heat Samin Nosrat" [ref=e55]:
+          - cell "Salt, Fat, Acid, Heat" [ref=e56]:
+            - link "Salt, Fat, Acid, Heat" [ref=e57] [cursor=pointer]:
+              - /url: "#"
+          - cell "Samin Nosrat" [ref=e58]
+        - row "Into the Wild Jon Krakauer" [ref=e59]:
+          - cell "Into the Wild" [ref=e60]:
+            - link "Into the Wild" [ref=e61] [cursor=pointer]:
+              - /url: "#"
+          - cell "Jon Krakauer" [ref=e62]
+        - row "E2E Test Title E2E Author" [ref=e63]:
+          - cell "E2E Test Title" [ref=e64]:
+            - link "E2E Test Title" [ref=e65] [cursor=pointer]:
+              - /url: "#"
+          - cell "E2E Author" [ref=e66]
+```

@@ -33,11 +33,18 @@ const { getBooks } = require("./utils/retrieveBooksUtil");
 app.get("/books", getBooks);
 
 server = app.listen(PORT, function () {
-  const address = server.address();
-  const baseUrl = `http://${
-    address.address == "::" ? "localhost" : address.address
-  }:${address.port}`;
-  console.log(`Demo project at: ${baseUrl}`);
+  try {
+    const address = server && server.address ? server.address() : null;
+    if (!address || !address.port) {
+      console.log(`Demo project at: http://localhost:${PORT}`);
+      return;
+    }
+    const host = address.address == "::" ? "localhost" : address.address;
+    const baseUrl = `http://${host}:${address.port}`;
+    console.log(`Demo project at: ${baseUrl}`);
+  } catch (e) {
+    console.log(`Demo project at: http://localhost:${PORT}`);
+  }
 });
 
 module.exports = { app, server };

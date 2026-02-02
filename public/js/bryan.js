@@ -38,3 +38,8 @@ qs("save-book-btn").addEventListener("click", async () => {
 qs("cancel-btn").addEventListener("click", () => {
     hideEl(qs("book-modal"));   // just hide modal
 });
+
+// expose internals for testing
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports._test = { qs, showEl, hideEl };
+}

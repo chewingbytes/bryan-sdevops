@@ -71,6 +71,12 @@
       "title": "Into the Wild",
       "author": "Jon Krakauer",
       "content": "The true story of a young man who gives up his comfortable life, donates all his money, and tries to live alone in the Alaskan wilderness."
+    },
+    {
+      "user": "administrator",
+      "title": "E2E Test Title",
+      "author": "E2E Author",
+      "content": "E2E Content"
     }
   ]
 }
