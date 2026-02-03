@@ -15,6 +15,5 @@ spec:
       containers:
         - name: bryan-devops # Name of the container
           image: bryan19191919191919/bryan-devops:latest  # <--- MUST match your push
-          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 5050 # Port that the container exposes
