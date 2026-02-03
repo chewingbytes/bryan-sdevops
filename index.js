@@ -5,9 +5,14 @@ var app = express();
 const PORT = process.env.PORT || 5050;
 var startPage = "index.html";
 
+const logger = require("./logger");
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static("./public"));
+
+const statusMonitor = require("express-status-monitor");
+app.use(statusMonitor());
 
 const { retrieveUsers } = require("./utils/retrieveUserUtil");
 app.get("/retrieve-users", retrieveUsers);
@@ -15,15 +20,14 @@ app.get("/retrieve-users", retrieveUsers);
 const { addUser } = require("./utils/jonathanUtil");
 app.post("/add-user", addUser);
 
+const { deleteBook } = require("./utils/williamUtil");
+app.delete("/delete-book", deleteBook);
 
-const { deleteBook } = require('./utils/williamUtil')
-app.delete('/delete-book', deleteBook)
+const { updateBook } = require("./utils/editBookUtil");
+app.put("/books/:title", updateBook);
 
-const { updateBook } = require('./utils/editBookUtil')
-app.put('/books/:title', updateBook)
-
-app.get('/', (req, res) => {
-    res.sendFile(__dirname + "/public/" + startPage);
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/public/" + startPage);
 });
 
 const { addBook } = require("./utils/bryanUtil");
@@ -42,6 +46,8 @@ server = app.listen(PORT, function () {
     const host = address.address == "::" ? "localhost" : address.address;
     const baseUrl = `http://${host}:${address.port}`;
     console.log(`Demo project at: ${baseUrl}`);
+    logger.info(`Demo project at: ${baseUrl}!`);
+    logger.error(`Example of error log`);
   } catch (e) {
     console.log(`Demo project at: http://localhost:${PORT}`);
   }
