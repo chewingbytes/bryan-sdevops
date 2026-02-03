@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: bryan-devops
+spec:
+  type: NodePort # Exposes the service on a port on each node
+  selector:
+    app: bryan-devops # Must match the 'labels' in your Deployment template
+  ports:
+    - protocol: TCP
+      port: 5050 # Port the Service is reachable on internally
+      targetPort: 5050 # Port the application is listening on inside the pod
+      nodePort: 30080 # Port you can hit from your browser (e.g., localhost:30080)
