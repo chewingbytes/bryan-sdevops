@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: bryan-devops-deployment # Name of the deployment
+  name: bryan-devops-deployment 
 spec:
-  replicas: 2 # specifies how many identical replicas (pods) of the application should be maintained
+  replicas: 2 
   selector:
     matchLabels:
-      app: bryan-devops # Selector to match pods managed by this deployment
+      app: bryan-devops 
   template:
     metadata:
       labels:
-        app: bryan-devops # Labels applied to pods created by this deployment
+        app: bryan-devops 
     spec:
       containers:
-        - name: bryan-devops # Name of the container
+        - name: bryan-devops 
           image: bryan-devops:{{BUILD_NUMBER}}
           imagePullPolicy: IfNotPresent
           ports:
-            - containerPort: 5050 # Port that the container exposes
+            - containerPort: 5050 

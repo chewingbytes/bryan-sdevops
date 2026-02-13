@@ -29,7 +29,6 @@ async function readBooksFile() {
     }
   }
 }
-
 // -----------------
 // write books to JSON file
 // -----------------
